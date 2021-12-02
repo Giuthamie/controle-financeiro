@@ -8,12 +8,20 @@ const inputTransactionAmount = document.querySelector('#amount');
 
 /* Transações ficticias, contendo objetos com id, nome e valor da transação*/
 
-const dummyTransactions = [
+let dummyTransactions = [
 { id: 1, name: 'Bolo de brigadeiro', amount: -20 },
 { id: 2, name: 'Salário', amount: 300 },
 { id: 3, name: 'Torta de frango', amount: -10 },
 { id: 4, name: 'Violão', amount: 150 },
 ]
+
+
+/*Funcionalidade para remoção das transações*/
+
+const removeTransaction = ID => {
+    dummyTransactions = dummyTransactions.filter(transaction => transaction.id !== ID)
+    init()
+}
 
 /*manipulação no dom para add as transações nas li's*/
 
@@ -26,7 +34,11 @@ const addTransactionIntoDom = transaction => {
 
     li.classList.add(CSSClass)
     li.innerHTML = `
-    ${transaction.name} <span>${operator} R$ ${amountWithoutOperator} </span><button class="delete-btn">x</button>
+    ${transaction.name} <span>${operator} R$ ${amountWithoutOperator}
+     </span>
+     <button class="delete-btn" onClick="removeTransaction(${transaction.id})">
+     x
+     </button>
     `
     transactionsUl.append(li)
 }
