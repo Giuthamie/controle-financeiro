@@ -54,19 +54,39 @@ const updateBalanceValues = () => {
 /* Função que executa add as transações no dom*/
 
 const init = () => {
+    transactionsUl.innerHTML = ''
     dummyTransactions.forEach(addTransactionIntoDom)
     updateBalanceValues()
 }
 
 init()
 
+const generateId = () => Math.round(Math.random() * 1000)
+
 /*o return no if faz com que a execução pare e não precise de else*/
 
 form.addEventListener('submit', event => {
     event.preventDefault()
-    if(inputTransactionName.value.trim() === ''  || inputTransactionAmount.value.trim() === ''){
+
+    const transactionName = inputTransactionName.value.trim();
+    const transactionAmount = inputTransactionAmount.value.trim();
+
+    if(transactionName === ''  || transactionAmount === ''){
         alert('Por favor, preencher os campos de nome e valor da transação!')
         return
     }
-    
+    const transaction = { 
+        id: generateId(), 
+        name: transactionName, 
+        amount: Number(transactionAmount)
+    }
+
+    dummyTransactions.push(transaction)
+    init()
+
+    /*limpar os valores*/
+
+    inputTransactionName.value = ''
+    inputTransactionAmount.value = ''
+
 })
