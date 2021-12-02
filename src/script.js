@@ -16,6 +16,7 @@ let transactions = localStorage
 const removeTransaction = ID => {
     transactions = transactions.filter(transaction => 
         transaction.id !== ID)
+    updateLocalSotare()
     init()
 }
 
@@ -69,6 +70,11 @@ const init = () => {
 
 init()
 
+/*função que add a transação no localStorage*/
+const updateLocalSotare = () => {
+    localStorage.setItem('transactions', JSON.stringify(transactions))
+}
+
 const generateId = () => Math.round(Math.random() * 1000)
 
 /*o return no if faz com que a execução pare e não precise de else*/
@@ -91,6 +97,7 @@ form.addEventListener('submit', event => {
 
     transactions.push(transaction)
     init()
+    updateLocalSotare()
 
     /*limpar os valores*/
 
