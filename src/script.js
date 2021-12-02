@@ -1,7 +1,10 @@
 const transactionsUl = document.querySelector('#transactions');
 const incomeDisplay = document.querySelector('#money-plus');
 const expenseDisplay = document.querySelector('#money-minus');
-const balanceDisplay = document.querySelector('#balance')
+const balanceDisplay = document.querySelector('#balance');
+const form = document.querySelector('#form');
+const inputTransactionName = document.querySelector('#text');
+const inputTransactionAmount = document.querySelector('#amount');
 
 /* Transações ficticias, contendo objetos com id, nome e valor da transação*/
 
@@ -56,3 +59,14 @@ const init = () => {
 }
 
 init()
+
+/*o return no if faz com que a execução pare e não precise de else*/
+
+form.addEventListener('submit', event => {
+    event.preventDefault()
+    if(inputTransactionName.value.trim() === ''  || inputTransactionAmount.value.trim() === ''){
+        alert('Por favor, preencher os campos de nome e valor da transação!')
+        return
+    }
+    
+})
