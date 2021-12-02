@@ -1,4 +1,7 @@
-const transactionsUl = document.querySelector('#transactions')
+const transactionsUl = document.querySelector('#transactions');
+const incomeDisplay = document.querySelector('#money-plus');
+const expenseDisplay = document.querySelector('#money-minus');
+const balanceDisplay = document.querySelector('#balance')
 
 /* Transações ficticias, contendo objetos com id, nome e valor da transação*/
 
@@ -36,11 +39,14 @@ const updateBalanceValues = () => {
         .filter(value => value > 0)
         .reduce((accumulator, value) => accumulator + value, 0)
         .toFixed(2)
-    const expense = transactionsAmount
-        .filter(value => value > 0)
-        .reduce((accumulator, value) => accumulator + value, 0)
+    const expense = Math.abs(transactionsAmount
+        .filter(value => value < 0)
+        .reduce((accumulator, value) => accumulator + value, 0))
         .toFixed(2)
-    console.log(income)
+    
+        balanceDisplay.textContent = `R$ ${total}`
+        incomeDisplay.textContent = `R$ ${income}`
+        expenseDisplay.textContent = `R$ ${expense}`
 }
 /* Função que executa add as transações no dom*/
 
