@@ -28,6 +28,7 @@ const addTransactionIntoDom = transaction => {
 
 const updateBalanceValues = () => {
     const transactionsAmount = dummyTransactions.map(transaction => transaction.amount)
+    const total = transactionsAmount.reduce((accumulator, transaction) => accumulator + transaction, 0).toFixed(2)
 }
 /* Função que executa add as transações no dom*/
 
